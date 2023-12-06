@@ -14,6 +14,11 @@ add_message_files(
   RobotInfo.msg
 )
 
+add_service_files(
+  FILES
+  SetTargetDetec.srv
+)
+
 generate_messages(
   DEPENDENCIES
   geometry_msgs 
@@ -25,8 +30,8 @@ catkin_package(
 )
 
 include_directories(
-# include
-${catkin_INCLUDE_DIRS}
+  # include
+  ${catkin_INCLUDE_DIRS}
 )
 
 
@@ -39,9 +44,15 @@ target_link_libraries(topic_sub ${catkin_LIBRARIES})
 add_dependencies(topic_sub ${PROJECT_NAME}_generate_messages_cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
+add_executable(service_server src/service_server.cpp)
+target_link_libraries(service_server ${catkin_LIBRARIES})
+add_dependencies(service_server ${PROJECT_NAME}_generate_messages_cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+add_executable(service_client src/service_client.cpp)
+target_link_libraries(service_client ${catkin_LIBRARIES})
+add_dependencies(service_client ${PROJECT_NAME}_generate_messages_cpp ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
 catkin_install_python(PROGRAMS
-  scripts/topic_pub.py scripts/topic_sub.py
+  scripts/topic_pub.py scripts/topic_sub.py scripts/service_server.py scripts/service_client.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
-
-#  scripts/service_server.py scripts/service_client.py
