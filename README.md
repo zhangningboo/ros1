@@ -1,8 +1,8 @@
 # 机械臂
 
-- 点 `P` 在空间 `{A}` 下的坐标表示：$^{A}P = [p_x, p_y, p_z]^T$
+- 点 `P` 在空间 `{A}` 下的坐标表示： $^{A}P = [p_x, p_y, p_z]^T$
 - 基坐标系为 `{A}`，在其中有一个刚体 `M`，在 `M` 上建立坐标系 `{B}`,坐标系 `{B}` 相对于坐标系 `{A}` 的描述，即为 `M` 在坐标系 `{A}` 的位置和姿态
-- $ \hat{X}_B$、$\hat{Y}_B$、$\hat{Z}_B $ 表示坐标系 `{B}` 三个主轴方向的矢量
+- $\hat{X}_B$、 $\hat{Y}_B$、 $\hat{Z}_B$ 表示坐标系 `{B}` 三个主轴方向的矢量
 - `{B}` 相对于 `{A}` 的姿态，使用旋转矩阵表示
  $$ ^{A}_{B}R = \begin{pmatrix} ^{A}\hat{X}_B & ^{A}\hat{Y}_B & ^{A}\hat{Z}_B\end{pmatrix} 
  = \begin{pmatrix} 
@@ -31,22 +31,23 @@
     $$ \begin{cases} \theta = 2 \arccos q_0  \\ [n_x, n_y, n_z]^T = [q_1, q_2, q_3]^T / \sin \frac{\theta}{2} \end{cases}$$
 
 
-    # ROS环境
+# ROS环境
 
-    ```shell
-    $ git clone https://github.com/opencv/opencv.git
-    $ git clone https://github.com/opencv/opencv_contrib.git
-    $ git checkout 4.8.1
-    $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
-      -D CMAKE_INSTALL_PREFIX=/usr/local/opencv481 \
-      -D OPENCV_ENABLE_NONFREE=ON \
-      -D OPENCV_EXTRA_MODULES_PATH=/home/ubuntu/workspace/opencv_contrib/modules \
-      -D OPENCV_GENERATE_PKGCONFIG=YES \
-      -D WITH_QT=ON \
-      -D WITH_OPENGL=ON \
-      -D WITH_CUDA=ON \
-      -D BUILD_EXAMPLES=OFF \
-      -D INSTALL_PYTHON_EXAMPLES=OFF \
-      -D INSTALL_C_EXAMPLES=OFF ..
-    
-    ```
+- OpenCV安装
+```shell
+$ git clone https://github.com/opencv/opencv.git
+$ git clone https://github.com/opencvopencv_contrib.git
+$ git checkout 4.8.1
+$ cmake -D CMAKE_BUILD_TYPE=RELEASE \
+  -D CMAKE_INSTALL_PREFIX=/usr/local/opencv481 \
+  -D OPENCV_ENABLE_NONFREE=ON \
+  -D OPENCV_EXTRA_MODULES_PATH=/home/ubuntu/workspace/opencv_contrib/modules \
+  -D OPENCV_GENERATE_PKGCONFIG=YES \
+  -D WITH_QT=ON \
+  -D WITH_OPENGL=ON \
+  -D WITH_CUDA=ON \
+  -D BUILD_EXAMPLES=OFF \
+  -D INSTALL_PYTHON_EXAMPLES=OFF \
+  -D INSTALL_C_EXAMPLES=OFF ..
+
+```

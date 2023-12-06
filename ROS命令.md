@@ -2,6 +2,7 @@
 
 - `catkin_init_workspace` :  ws/src目录下
 - `catkin_create_pkg <pkg_name>`
+- `rosed`: 编辑文件
 - `rosmsg`
     - `rosmsg show <msg_type>`
     - `rosmsg info <msg_type>`
@@ -9,5 +10,27 @@
     - `rosmsg package <pkg_name>`
     - `rosmsg packages`
     - `rosmsg <cmd> -h`
-
-- `rosed`: 编辑文件
+- `rossrv`
+    - `rossrv show [options] <service_type>`
+    - `rossrv info [options] <service_type>`
+    - `rossrv list`
+    - `rossrv package <package>`
+    - `rossrv packages`
+    - `rossrv <cmd> -h`
+- `rosservice`: 服务
+    - `rosservice list`
+    - `rosservice args <service_name>`
+    - `rosservice call <service_name> [args...]`
+    - `rosservice find srv-type`
+    - `rosservice info <service_name>`
+    - `rosservice type <service_name>`
+    - `rosservice uri <service_name>`
+    - `rosservice <cmd> -h`
+- `rosparam`
+    - `rosparam set <param_name> <param_value>`
+    - `rosparam get <param_name>`
+    - `rosparam load <file>`
+    - `rosparam dump <file>`
+    - `rosparam delete <param_name>`
+    - `rosparam list`
+    - `rosparam <cmd> -h`
