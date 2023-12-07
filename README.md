@@ -51,3 +51,60 @@ $ cmake -D CMAKE_BUILD_TYPE=RELEASE \
   -D INSTALL_C_EXAMPLES=OFF ..
 
 ```
+
+### 清理ROS进程
+- 准备
+```shell
+$ mkdir /home/ubuntu/.killros
+$ touch /home/ubuntu/.killros/killros.py
+$ touch /home/ubuntu/.killros/killros
+$ chmod +x /home/ubuntu/.killros/killros
+$ echo "export PATH=/home/ubuntu/.killros:$PATH" >> ~/.bashrc
+$ source ~/.bashrc
+$ killros  # 清理
+```
+- killros.py
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+import os
+import subprocess
+
+ROS_VERSION = os.environ.get('ROS_DISTRO')
+
+def is_kill(cmd: str):
+    if "rosrun" in cmd:
+        return True
+    if "roslaunch" in cmd:
+        return True
+    if ROS_VERSION in cmd:
+        return True
+    return False
+
+
+def kill_ros_processes():
+    try:
+        # 使用ps命令获取包含 "ros" 的进程信息
+        process_info = subprocess.check_output(["ps", "-e", "-o", "pid,cmd"])
+        process_info = process_info.decode("utf-8")
+
+        # 遍历每一行，查找包含 "ros" 的进程并终止
+        for line in process_info.split("\n"):
+            # print(line)
+            if is_kill(line):
+                print(line)
+                pid = line.split()[0]
+                subprocess.run(["kill", "-9", pid])
+                print(f"Terminated process with PID {pid}")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    kill_ros_processes()
+```
+- killros
+```shell
+#!/bin/bash
+
+python3 /home/ubuntu/.killros/killros.py
+```
