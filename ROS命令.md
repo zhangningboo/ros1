@@ -34,3 +34,19 @@
     - `rosparam delete <param_name>`
     - `rosparam list`
     - `rosparam <cmd> -h`
+- `robot_state_publisher` & `joint_state_publisher`
+    - `robot_state_publisher` 加载 `URDF` 中的初始参数，并获取 `/joint_states` 话题中的姿态数据，计算得出正向运动学结果，并发布到c`/tf`
+    - `/joint_states` 话题的消息类型是 `sensor_msgs/JointState`
+    ```shell
+    $ rosmsg show sensor_msgs/JointState
+    std_msgs/Header header
+    uint32 seq
+    time stamp
+    string frame_id
+    string[] name
+    float64[] position  # 位置，单位：rad或m
+    float64[] velocity  # 速度，单位：rad/s或m/s
+    float64[] effort    # 受到的力，单位：N.m或N
+    ```
+    - 真实机器人中，`/joint_states` 话题是由机器人驱动负责发布
+    - 仿真机器人中，通过 `joint_state_publisher` 发布虚拟节点的状态
