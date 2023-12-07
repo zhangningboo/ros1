@@ -35,6 +35,13 @@ def action_client():
     goal.target_pose.orientation.w = 1
     # 向action的服务端发送目标goal,并设置回调函数
     client.send_goal(goal, done_cb, active_cb, feedback_cb)
+    r = rospy.Rate(1)
+    for _ in range(10):
+        r.sleep()
+    client.cancel_goal()
+    goal.target_pose.position.x = 3.5
+    goal.target_name = "new_box"
+    client.send_goal(goal, done_cb, active_cb, feedback_cb)
     # 阻塞,直到这个目标完成
     client.wait_for_result()
 

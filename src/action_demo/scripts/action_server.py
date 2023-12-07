@@ -24,14 +24,15 @@ class PickupPlaceServer():
         ## 通过循环,模拟任务完成的进度百分比
         success = True
         r = rospy.Rate(1)
-        for i in range(10):
+        step = 20
+        for i in range(step):
             # 若有抢占请求（目标被取消、收到新的目标),当前目标的状态设置为抢占（PREEMPTED）
             if self.server.is_preempt_requested():
                 rospy.loginfo('/pickup_place: Preempted')
                 self.server.set_preempted()
                 success = False
                 break
-            feedback.percent_complete += 10
+            feedback.percent_complete += 100 // step
             # 发布目标的执行过程反馈feedback
             self.server.publish_feedback(feedback)
             r.sleep()
