@@ -73,7 +73,7 @@ class PubMarker():
         r = rospy.Rate(rate)
         # 以20Hz的频率循环向外发布marker,text_marker和marker的位姿
         while not rospy.is_shutdown():
-            # marker在XY平面上做椭圆运动
+            # marker在XZ平面上做椭圆运动
             target_pose.header.frame_id = self.frame
             target_pose.pose.position.x = 1.0 + 0.5 * math.sin(theta)
             target_pose.pose.position.y = 0
@@ -97,7 +97,7 @@ class PubMarker():
             # 设置text_marker的显示文本
             text_marker.text = "User name is : " + self.user_name
             # 发布话题消息
-            pose_pub.publish(target_pose)
+            # pose_pub.publish(target_pose)  # TODO 这个话题的作用是什么
             marker_pub.publish(marker)
             name_pub.publish(text_marker)
             r.sleep()
