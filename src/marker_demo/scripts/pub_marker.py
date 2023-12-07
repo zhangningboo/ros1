@@ -97,7 +97,7 @@ class PubMarker():
             # 设置text_marker的显示文本
             text_marker.text = "User name is : " + self.user_name
             # 发布话题消息
-            # pose_pub.publish(target_pose)  # TODO 这个话题的作用是什么
+            pose_pub.publish(target_pose)  # 这个话题的作用：魏tf_demo中的机器人提供姿态数据
             marker_pub.publish(marker)
             name_pub.publish(text_marker)
             r.sleep()
